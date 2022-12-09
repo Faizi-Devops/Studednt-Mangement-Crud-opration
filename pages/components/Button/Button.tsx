@@ -1,11 +1,12 @@
 type ntu = {
     value:string,
-    color:string
+    color:string,
+    onCLickHandler : ()=>void
 }
 const Button = (props:ntu) =>{
     return(
         <div>
-            <button type="button" className={props.color}>{props.value}</button>
+            <button type="button" onClick={props.onCLickHandler} className={props.color}>{props.value}</button>
 
         </div>
     )
