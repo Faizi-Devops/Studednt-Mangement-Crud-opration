@@ -50,6 +50,22 @@ const Students = () => {
     }
 
     }
+    const onDeleteHandler = (ind:number) =>{
+    //     alert(ind)
+        
+        let DeleteStudents = data.filter((val,inde)=>{
+
+            if(inde !== ind){
+                return val
+            }
+
+        })
+        setData([...DeleteStudents])
+
+    }
+    const onUpdateHandler = () =>{
+
+    }
 
     return (
         <div>
@@ -105,10 +121,10 @@ const Students = () => {
                         <td>{value.Batch}</td>
                         <td>{value.Gender}</td>
                         <td>
-                            <Button value="Delete" color="btn btn-danger"/>
+                            <Button value="Delete" onCLickHandler={()=>onDeleteHandler(index)} color="btn btn-danger"/>
                         </td>
                         <td>
-                            <Button value="update" color="btn btn-success" />
+                            <Button value="update" onCLickHandler={onUpdateHandler} color="btn btn-success" />
                         </td>
                     </tr>
 
