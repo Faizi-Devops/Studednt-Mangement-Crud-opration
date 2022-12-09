@@ -30,6 +30,7 @@ const Students = () => {
 
     }
     const onctaHandler = () => {
+        if (naming && classing && batching && gendering !=""){
         let AddStudent = {
             Name: naming,
             Class: classing,
@@ -39,6 +40,14 @@ const Students = () => {
 
         }
         setData([...data, AddStudent])
+        setNaming("")
+        setClassing("")
+        setBatching("")
+        setGendering("")
+    }
+    else{
+        alert("Please Fill the params")
+    }
 
     }
 
@@ -51,16 +60,16 @@ const Students = () => {
                         <h5 className="card-title">Input Form</h5>
                         <hr />
                         <div className="mb-3">
-                            <input type="email" className="form-control" placeholder="Please enter your Name" onChange={alpha} />
+                            <input type="email" value={naming} className="form-control" placeholder="Please enter your Name" onChange={alpha} />
                         </div>
                         <div className="mb-3">
-                            <input type="email" className="form-control" placeholder="Please enter your Class Name" onChange={beta} />
+                            <input type="email" value={classing} className="form-control" placeholder="Please enter your Class Name" onChange={beta} />
                         </div>
                         <div className="mb-3">
-                            <input type="email" className="form-control" placeholder="Please enter your Batch Name" onChange={gema} />
+                            <input type="email" value={batching} className="form-control" placeholder="Please enter your Batch Name" onChange={gema} />
                         </div>
                         <div className="mb-3">
-                            <input type="email" className="form-control" placeholder="Please enter your Gende" onChange={peta} />
+                            <input type="email" value={gendering} className="form-control" placeholder="Please enter your Gende" onChange={peta} />
                         </div>
                         <div className="text-center">
                             <Button value="Add Students" onCLickHandler={onctaHandler} color="btn btn-primary" />
@@ -71,6 +80,7 @@ const Students = () => {
                 </div>
 
             </div>
+            <div className="table-responsive-sm-xl-md-lg-xxl">
             <table className="table">
                 <thead>
                     <tr>
@@ -79,6 +89,9 @@ const Students = () => {
                         <th scope="col">Class</th>
                         <th scope="col">Batch</th>
                         <th scope="col">Gender</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Update</th>
+
                     </tr>
                 </thead>
                 {
@@ -91,6 +104,12 @@ const Students = () => {
                         <td>{value.Class}</td>
                         <td>{value.Batch}</td>
                         <td>{value.Gender}</td>
+                        <td>
+                            <Button value="Delete" color="btn btn-danger"/>
+                        </td>
+                        <td>
+                            <Button value="update" color="btn btn-success" />
+                        </td>
                     </tr>
 
                 </tbody>
@@ -100,6 +119,7 @@ const Students = () => {
                 }
                 
             </table>
+            </div>
 
 
         </div>
