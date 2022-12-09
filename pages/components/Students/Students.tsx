@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 type stu = {
     Name: string,
     Class: string,
-    Batch: string | number,
+    Batch: string,
     Gender: string
 }
 
@@ -13,6 +13,7 @@ const Students = () => {
     const [classing, setClassing] = useState<string>("")
     const [batching, setBatching] = useState<string>("")
     const [gendering, setGendering] = useState<string>("")
+    const [flag,setFlag]=useState<boolean>(false)
     const alpha = (e: any) => {
         setNaming(e.target.value)
 
@@ -63,7 +64,15 @@ const Students = () => {
         setData([...DeleteStudents])
 
     }
-    const onUpdateHandler = () =>{
+    const onUpdateHandler = (vlu:stu) =>{
+        setFlag(true)
+        setNaming(vlu.Name)
+        setClassing(vlu.Class)
+        setBatching(vlu.Batch)
+        setGendering(vlu.Gender)
+
+    }
+    const onEditHandler = () =>{
 
     }
 
@@ -88,7 +97,10 @@ const Students = () => {
                             <input type="email" value={gendering} className="form-control" placeholder="Please enter your Gende" onChange={peta} />
                         </div>
                         <div className="text-center">
-                            <Button value="Add Students" onCLickHandler={onctaHandler} color="btn btn-primary" />
+                            {
+                                flag?<Button value="Update Students" onCLickHandler={onEditHandler} color="btn btn-warning" />:
+                            
+                            <Button value="Add Students" onCLickHandler={onctaHandler} color="btn btn-primary" />}
 
                         </div>
 
@@ -124,7 +136,7 @@ const Students = () => {
                             <Button value="Delete" onCLickHandler={()=>onDeleteHandler(index)} color="btn btn-danger"/>
                         </td>
                         <td>
-                            <Button value="update" onCLickHandler={onUpdateHandler} color="btn btn-success" />
+                            <Button value="update" onCLickHandler={()=>onUpdateHandler(value)} color="btn btn-success" />
                         </td>
                     </tr>
 
