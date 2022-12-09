@@ -13,6 +13,7 @@ const Students = () => {
     const [classing, setClassing] = useState<string>("")
     const [batching, setBatching] = useState<string>("")
     const [gendering, setGendering] = useState<string>("")
+    const [updated,setUpdated]=useState<number>(0)
     const [flag,setFlag]=useState<boolean>(false)
     const alpha = (e: any) => {
         setNaming(e.target.value)
@@ -32,7 +33,7 @@ const Students = () => {
     }
     const onctaHandler = () => {
         if (naming && classing && batching && gendering !=""){
-        let AddStudent = {
+        let AddStudent:stu = {
             Name: naming,
             Class: classing,
             Batch: batching,
@@ -64,7 +65,8 @@ const Students = () => {
         setData([...DeleteStudents])
 
     }
-    const onUpdateHandler = (vlu:stu) =>{
+    const onUpdateHandler = (vlu:stu,indexing:number) =>{
+        setUpdated(indexing)
         setFlag(true)
         setNaming(vlu.Name)
         setClassing(vlu.Class)
@@ -73,6 +75,35 @@ const Students = () => {
 
     }
     const onEditHandler = () =>{
+        setFlag(false)
+        if (naming && classing && batching && gendering !=""){
+            let AddStudent:stu = {
+                Name: naming,
+                Class: classing,
+                Batch: batching,
+                Gender: gendering
+    
+    
+            }
+            let updatedStudents = data.map((vi,ini)=>{
+                if(updated === ini){
+                    return AddStudent
+                }
+                else{
+                    return vi
+                }
+
+            })
+            setData([...updatedStudents])
+            setNaming("")
+            setClassing("")
+            setBatching("")
+            setGendering("")
+        }
+        else{
+            alert("Please Fill the params")
+        }
+    
 
     }
 
@@ -136,7 +167,7 @@ const Students = () => {
                             <Button value="Delete" onCLickHandler={()=>onDeleteHandler(index)} color="btn btn-danger"/>
                         </td>
                         <td>
-                            <Button value="update" onCLickHandler={()=>onUpdateHandler(value)} color="btn btn-success" />
+                            <Button value="update" onCLickHandler={()=>onUpdateHandler(value,index)} color="btn btn-success" />
                         </td>
                     </tr>
 
